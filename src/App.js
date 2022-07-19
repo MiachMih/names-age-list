@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import ListOfNames from "./ListOfNames";
+import InputNames from "./InputNames";
+import { useState } from "react";
+import "./App.css";
 function App() {
+  const [list, setList] = useState([]);
+  function addPerson(person) {
+    setList((prevState) => {
+      return [
+        ...prevState,
+        { id: person.id, name: person.name, age: person.age },
+      ];
+    });
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <InputNames addPerson={addPerson} />
+      <ListOfNames list={list} />
     </div>
   );
 }
